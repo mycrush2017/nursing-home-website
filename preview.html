@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sweet Home Adult Family Care - Preview</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
+  <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD"></script>
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-white text-black">
+  <header class="bg-gray-100 p-6 flex items-center justify-between">
+    <div class="flex items-center space-x-4">
+      <img src="https://static.wixstatic.com/media/11062b_fce4349362194db9a95427b6d511ebaff000.jpg" alt="Logo" class="h-16 w-auto" />
+      <h1 class="text-3xl font-bold">Sweet Home Adult Family Care</h1>
+    </div>
+    <div class="text-right">
+      <p class="font-semibold">2953 Bickley Drive, Apopka, FL, USA</p>
+      <p>Email: <a href="mailto:info@sweethome.com" class="text-blue-600 underline">info@sweethome.com</a></p>
+      <p>Phone: (123) 456-7890</p>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto p-6 space-y-12">
+    <section class="text-center">
+      <h2 class="text-4xl font-bold mb-4">Welcome to Sweet Home Adult Family Care</h2>
+      <p class="text-lg max-w-3xl mx-auto">
+        Sweet Home Adult Family Care is an Assisted Living Facility in Apopka, Florida founded in 2023. We provide a safe, comfortable, and engaging environment for seniors who value independence, friendships, and quality medical care.
+      </p>
+      <img src="https://static.wixstatic.com/media/11062b_f5ab5669f0494541a7f3c0a37f710353~mv2_d_5000_3335_s_4_2.jpg" alt="Happy Senior Couple" class="mx-auto mt-6 rounded-lg shadow-lg max-w-full h-auto" />
+    </section>
+
+    <section>
+      <h3 class="text-3xl font-semibold mb-6 text-center">Our Services</h3>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+        <div>
+          <img src="https://static.wixstatic.com/media/54438f_5fdd1b0aa5454f52a9f7e0be370cbbae~mv2.png" alt="Meals" class="mx-auto mb-4 h-24 w-24" />
+          <h4 class="font-bold text-xl mb-2">Meals</h4>
+          <p>We serve fresh and nutritious meals prepared with the highest quality ingredients to meet every dietary need.</p>
+        </div>
+        <div>
+          <img src="https://static.wixstatic.com/media/54438f_3f73cbd7737e40d18ea32d3e0f1721f6~mv2.jpg" alt="Medication Monitoring" class="mx-auto mb-4 h-24 w-24" />
+          <h4 class="font-bold text-xl mb-2">Monitoring of Medication</h4>
+          <p>Our team ensures prescriptions are filled and taken at the right times, providing peace of mind.</p>
+        </div>
+        <div>
+          <img src="https://static.wixstatic.com/media/54438f_2a672ee9de544fa6a3231e73f676234c~mv2.jpeg" alt="Personal Care" class="mx-auto mb-4 h-24 w-24" />
+          <h4 class="font-bold text-xl mb-2">Personal Care</h4>
+          <p>Assistance with dressing and bathing by skilled caregivers to make daily life comfortable and stress-free.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-gray-100 p-8 rounded-lg text-center">
+      <h3 class="text-3xl font-semibold mb-4">Satisfaction or Your Money Back</h3>
+      <p>We provide the highest quality services with a money-back guarantee. Visit us today and experience the difference.</p>
+    </section>
+
+    <section class="text-center">
+      <h3 class="text-3xl font-semibold mb-6">Make a Payment</h3>
+      <div class="flex justify-center space-x-8">
+        <!-- PayPal Button Container -->
+        <div id="paypal-button-container"></div>
+
+        <!-- Stripe Button (redirect to Stripe Checkout) -->
+        <form action="stripe_checkout.php" method="POST">
+          <button type="submit" class="bg-purple-600 text-white px-6 py-3 rounded hover:bg-purple-700 transition">Pay with Stripe</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-gray-100 p-6 text-center text-sm text-gray-600">
+    &copy; 2024 Sweet Home Adult Family Care. All rights reserved.
+  </footer>
+
+  <script>
+    paypal.Buttons({
+      createOrder: function(data, actions) {
+        return actions.order.create({
+          purchase_units: [{
+            amount: {
+              value: '100.00'
+            },
+            description: 'Nursing Home Service'
+          }]
+        });
+      },
+      onApprove: function(data, actions) {
+        return actions.order.capture().then(function(details) {
+          alert('Transaction completed by ' + details.payer.name.given_name + '!');
+        });
+      }
+    }).render('#paypal-button-container');
+  </script>
+</body>
+</html>
