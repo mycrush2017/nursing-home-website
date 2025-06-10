@@ -15,4 +15,9 @@ if ($conn->connect_error) {
 
 // Set charset to utf8
 $conn->set_charset("utf8");
+
+// Start session
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 ?>
